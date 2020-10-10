@@ -1,0 +1,25 @@
+{
+  "name": "danyi/custom-enum",
+  "authors": [
+    {
+      "name": "Dániel SZÖLLŐSI",
+      "role": "Owner",
+      "homepage": "https://github.com/D4nyi"
+    }
+  ],
+  "type": "library",
+  "description": "A custom enum implementation for PHP.",
+  "keywords": [
+    "enum",
+    "custom enum"
+  ],
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "require": {
+    "php": "7.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "9.*",
+    "mockery/mockery": "1.4.0"
+  }
+}
