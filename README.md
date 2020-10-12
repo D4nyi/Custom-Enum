@@ -22,22 +22,19 @@ use CustomEnum\EnumFlag;
 final class Color extends Enum
 {
     public const None  = 0;
-    public const Red   = 1;
-    public const Green = 2;
-    public const Blue  = 3;
+    public const Red   = 0xFF0000;
+    public const Green = 0x00FF00;
+    public const Blue  = 0x0000FF;
 
     /**
      * @inheritDoc
      */
-    protected static function getConstants(): array
-    {
-        return [
-            'None'  => 0,
-            'Red'   => 1,
-            'Green' => 2,
-            'Blue'  => 3,
-        ];
-    }
+    protected static array $cache = [
+        'None'  => 0,
+        'Red'   => 0xFF0000,
+        'Green' => 0x00FF00,
+        'Blue'  => 0x0000FF,
+    ];
 }
 
 final class Days extends EnumFlag
@@ -51,21 +48,21 @@ final class Days extends EnumFlag
     public const Saturday  = 32;
     public const Sunday    = 64;
 
-    protected static function getConstants(): array
-    {
-        return [
-            'None'      => 0,
-            'Monday'    => 1,
-            'Tuesday'   => 2,
-            'Wednesday' => 4,
-            'Thursday'  => 8,
-            'Friday'    => 16,
-            'Saturday'  => 32,
-            'Sunday'    => 64,
-            'WeekDay'   => 128,
-            'Weekend'   => 256,
-        ];
-    }
+    /**
+     * @inheritDoc
+     */
+    protected static array $cache = [
+        'None'      => 0,
+        'Monday'    => 1,
+        'Tuesday'   => 2,
+        'Wednesday' => 4,
+        'Thursday'  => 8,
+        'Friday'    => 16,
+        'Saturday'  => 32,
+        'Sunday'    => 64,
+        'WeekDay'   => 128,
+        'Weekend'   => 256,
+    ];
 }
 ```
 
