@@ -12,7 +12,7 @@ $ composer require danyi/custom-enum
 ## Conventions for EnumFlag
 1. The first value __MUST be__ 'None' with the value of 0.
 2. From that each enum's value should be the power of 2 in ascending order
-3. The class coded with these conventions.
+The class coded with these conventions would work with this package.
 
 ## Define enums
 ```php

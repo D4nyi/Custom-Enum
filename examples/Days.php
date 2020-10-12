@@ -22,19 +22,19 @@ final class Days extends EnumFlag
     public const Saturday  = 32;
     public const Sunday    = 64;
 
-    protected static function getConstants(): array
-    {
-        return [
-            'None'      => 0,
-            'Monday'    => 1,
-            'Tuesday'   => 2,
-            'Wednesday' => 4,
-            'Thursday'  => 8,
-            'Friday'    => 16,
-            'Saturday'  => 32,
-            'Sunday'    => 64,
-            'WeekDay'   => 128,
-            'Weekend'   => 256,
-        ];
-    }
+    /**
+     * @inheritDoc
+     */
+    protected static array $cache = [
+        'None'      => 0,
+        'Monday'    => 1,
+        'Tuesday'   => 2,
+        'Wednesday' => 4,
+        'Thursday'  => 8,
+        'Friday'    => 16,
+        'Saturday'  => 32,
+        'Sunday'    => 64,
+        'WeekDay'   => 128,
+        'Weekend'   => 256,
+    ];
 }

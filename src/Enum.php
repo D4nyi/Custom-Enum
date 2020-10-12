@@ -19,6 +19,21 @@ namespace CustomEnum;
 abstract class Enum
 {
     /**
+     * Holds the key-value pairs of the enum constants
+     * Int the following way:
+     * <code>
+     * $cache = [
+     * 'None => 0,
+     * 'One' => 1,
+     * etc...
+     * ];
+     * </code>
+     *
+     * @var array|int[]
+     */
+    protected static array $cache;
+
+    /**
      * Enum constructor.
      * Forces the implementer to hide its ctor, and prevent initializations
      */
@@ -38,7 +53,7 @@ abstract class Enum
     {
         $result =
             self::isValidValue($value, $strict) ?
-                array_search($value, static::getConstants(), $strict) :
+                array_search($value, static::$cache, $strict) :
                 'None';
 
         return $toLower ?
@@ -55,8 +70,10 @@ abstract class Enum
      */
     public static final function isValidValue(int $value, bool $strict = true): bool
     {
-        $values = array_values(static::getConstants());
-        return !($strict && $value === 0) && in_array($value, $values, $strict);
+        return !($strict && $value === 0) && // if strict true and the value is 0 than its not a valid value
+               in_array($value,
+                   static::$cache,
+                   $strict); // if the value is found in the constants (strict -> type check is applied or not)
     }
 
     /**
@@ -68,17 +85,10 @@ abstract class Enum
      */
     public static final function isValidName(string $name, $strict = false): bool
     {
-        $constants = static::getConstants();
+        $constants = static::$cache;
         return
             $strict ?
                 array_key_exists($name, $constants) :
                 in_array(strtolower($name), array_map('strtolower', array_keys($constants)));
     }
-
-    /**
-     * Gets the enum name, value pairs from the implementer
-     *
-     * @return array
-     */
-    protected abstract static function getConstants(): array;
 }

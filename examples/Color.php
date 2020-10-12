@@ -14,20 +14,17 @@ use CustomEnum\Enum;
 final class Color extends Enum
 {
     public const None  = 0;
-    public const Red   = 1;
-    public const Green = 2;
-    public const Blue  = 3;
+    public const Red   = 0xFF0000;
+    public const Green = 0x00FF00;
+    public const Blue  = 0x0000FF;
 
     /**
      * @inheritDoc
      */
-    protected static function getConstants(): array
-    {
-        return [
-            'None'  => 0,
-            'Red'   => 1,
-            'Green' => 2,
-            'Blue'  => 3,
-        ];
-    }
+    protected static array $cache = [
+        'None'  => 0,
+        'Red'   => 0xFF0000,
+        'Green' => 0x00FF00,
+        'Blue'  => 0x0000FF,
+    ];
 }
