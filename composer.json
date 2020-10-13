@@ -25,6 +25,9 @@
   "autoload": {
     "psr-4": {
       "CustomEnum\\": "src/"
+    },
+    "psr-0": {
+      "CustomEnum\\": "src/"
     }
   },
   "autoload-dev": {
@@ -38,6 +41,6 @@
     }
   },
   "scripts": {
-    "test": "phpunit --configuration phpunit.xml tests --cache-result-file=.phpunit.result.cache"
+    "test": "phpunit --configuration phpunit.xml tests --teamcity --cache-result-file=.phpunit.result.cache"
   }
 }

@@ -7,14 +7,14 @@
 
 namespace Tests\Unit\CustomEnum;
 
-use Example\Color;
 use PHPUnit\Framework\TestCase;
+use Tests\Classes\Color;
 
 class EnumTest extends TestCase
 {
-    const Zero = 0;
+    const Zero     = 0;
     const MinusOne = -1;
-    const Big = 102030405;
+    const Big      = 102030405;
 
     public function testIsValidName()
     {

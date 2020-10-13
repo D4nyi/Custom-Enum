@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Example;
+namespace Tests\Classes;
 
 use CustomEnum\EnumFlag;
 

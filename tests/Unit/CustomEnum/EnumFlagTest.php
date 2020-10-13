@@ -7,8 +7,8 @@
 
 namespace Tests\Unit\CustomEnum;
 
-use Example\Days;
 use PHPUnit\Framework\TestCase;
+use Tests\Classes\Days;
 
 class EnumFlagTest extends TestCase
 {
