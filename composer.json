@@ -28,12 +28,16 @@
     }
   },
   "autoload-dev": {
+    "psr-0": {
+      "Tests\\": "tests/",
+      "Example\\": "examples/"
+    },
     "psr-4": {
       "Tests\\": "tests/",
       "Example\\": "examples/"
     }
   },
   "scripts": {
-    "test": "phpunit --no-configuration tests --cache-result-file=.phpunit.result.cache"
+    "test": "phpunit --configuration phpunit.xml tests --cache-result-file=.phpunit.result.cache"
   }
 }

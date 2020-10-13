@@ -79,16 +79,16 @@ abstract class Enum
     /**
      * Checks if the provided enum name is in the current enum type
      *
-     * @param string $name   enum name whose name are looked for
-     * @param bool   $strict case sensitive comparison
+     * @param string $name          enum name whose name are looked for
+     * @param bool   $caseSensitive case sensitive comparison
      * @return bool true if the value is found, otherwise false
      */
-    public static final function isValidName(string $name, $strict = false): bool
+    public static final function isValidName(string $name, $caseSensitive = false): bool
     {
         $constants = static::$cache;
         return
-            $strict ?
+            $caseSensitive ?
                 array_key_exists($name, $constants) :
-                in_array(strtolower($name), array_map('strtolower', array_keys($constants)));
+                in_array(strtolower($name), array_map('strtolower', array_keys($constants)), true);
     }
 }

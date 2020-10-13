@@ -87,12 +87,12 @@ abstract class EnumFlag extends Enum implements Flag
         }
 
         $results = [];
-        foreach ($filtered as $api) {
-            if ($api < $flag) {
-                $flag -= $api;
-                $results[] = $api;
-            } elseif ($api === $flag) {
-                $results[] = $api;
+        foreach ($filtered as $value) {
+            if ($value < $flag) {
+                $flag -= $value;
+                $results[] = $value;
+            } elseif ($value === $flag) {
+                $results[] = $value;
             }
         }
 

@@ -15,6 +15,7 @@ class EnumTest extends TestCase
     const Zero = 0;
     const MinusOne = -1;
     const Big = 102030405;
+
     public function testIsValidName()
     {
         $this->assertTrue(Color::isValidName('Red', true));
