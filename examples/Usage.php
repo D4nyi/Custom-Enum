@@ -7,9 +7,6 @@
 
 namespace Example;
 
-use Tests\Classes\Color;
-use Tests\Classes\Days;
-
 class Usage
 {
     public function show()

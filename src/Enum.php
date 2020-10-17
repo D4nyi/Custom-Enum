@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace CustomEnum;
 
+use CustomEnum\Exceptions\InvalidValueException;
+
 /**
  * Class Enum
  *
@@ -31,14 +33,23 @@ abstract class Enum
      *
      * @var array|int[]
      */
-    protected static array $cache;
+    protected static array   $cache;
+    protected int            $value;
+    protected string         $valueName;
 
     /**
      * Enum constructor.
-     * Forces the implementer to hide its ctor, and prevent initializations
+     *
+     * @param int $value the current enum instance's value
+     * @throws InvalidValueException
      */
-    protected function __construct()
+    public function __construct(int $value)
     {
+        if (static::isValidValue($value) === false) {
+            throw new InvalidValueException("The value ($value) which is provided is not an enum value");
+        }
+        $this->value = $value;
+        $this->valueName = self::nameOf($this->value);
     }
 
     /**
@@ -59,6 +70,32 @@ abstract class Enum
         return $toLower ?
             strtolower($result) :
             $result;
+    }
+
+    /**
+     * Tries to get the value of the provided enum name, if nothing is found -1 is returned
+     *
+     * @param string $name
+     * @param bool   $caseSensitive
+     * @return int the value of the enum name, if not found -1
+     */
+    public static final function valueOf(string $name, bool $caseSensitive = false): int
+    {
+        if (static::isValidName($name, $caseSensitive) === false) {
+            return -1;
+        }
+
+        if ($caseSensitive) {
+            return static::$cache[$name];
+        }
+
+        $keys = array_keys(static::$cache);
+        $index = array_search(
+            strtolower($name),
+            array_map('strtolower', $keys)
+        );
+
+        return static::$cache[$keys[$index]];
     }
 
     /**
@@ -90,5 +127,44 @@ abstract class Enum
             $caseSensitive ?
                 array_key_exists($name, $constants) :
                 in_array(strtolower($name), array_map('strtolower', array_keys($constants)), true);
+    }
+
+    /**
+     * Creates a new instance from an enum name
+     * @param string $name from which a new instance is initialized
+     * @param bool   $caseSensitive
+     * @return self
+     * @throws InvalidValueException if an invalid name is provided
+     */
+    public static abstract function byName(string $name, bool $caseSensitive = true): self;
+
+    /**
+     * Gets the name of the instance's value
+     *
+     * @return string name of the instance's value
+     */
+    public final function getName(): string
+    {
+        return $this->valueName;
+    }
+
+    /**
+     * Gets the current enum value
+     *
+     * @return int
+     */
+    public final function getValue(): int
+    {
+        return $this->value;
+    }
+
+    /**
+     * Gets the current enum as a key-value pair
+     *
+     * @return int[]
+     */
+    public final function getAsKeyValue(): array
+    {
+        return [$this->getName() => $this->value];
     }
 }

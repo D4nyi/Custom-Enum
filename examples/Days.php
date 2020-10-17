@@ -2,14 +2,15 @@
 /**
  * Copyright © Dániel Szöllősi 2020 - 2020
  * All rights reserved.
- * Created at 2020. 10. 10. 19:48
+ * Created at 2020. 10. 14. 15:40
  */
 
 declare(strict_types=1);
 
-namespace Tests\Classes;
+namespace Example;
 
 use CustomEnum\EnumFlag;
+use CustomEnum\Exceptions\InvalidValueException;
 
 final class Days extends EnumFlag
 {
@@ -34,7 +35,18 @@ final class Days extends EnumFlag
         'Friday'    => 16,
         'Saturday'  => 32,
         'Sunday'    => 64,
-        'WeekDay'   => 128,
-        'Weekend'   => 256,
     ];
+
+    /**
+     * @inheritDoc
+     * @return self
+     */
+    public static function byName(string $name, bool $caseSensitive = true): self
+    {
+        if (static::isValidName($name) === false) {
+            throw new InvalidValueException("The value ('$name') which is provided is not an enum value");
+        }
+        $value = static::valueOf($name, $caseSensitive);
+        return new self($value);
+    }
 }

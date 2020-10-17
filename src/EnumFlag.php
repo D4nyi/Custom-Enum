@@ -26,6 +26,22 @@ abstract class EnumFlag extends Enum implements Flag
      * @inheritDoc
      */
     protected static array $cache;
+    private bool           $isFlag;
+    private array          $builtFrom;
+
+    /**
+     * EnumFlag constructor.
+     *
+     * @param int $value the current flag instance's value
+     */
+    public function __construct(int $value)
+    {
+        parent::__construct(0);
+        $this->isFlag = self::isValidValue($value) === false;
+        $this->value = $value;
+        $this->valueName = $this->isFlag ? strval($this->value) : self::nameOf($this->value);
+        //$this->builtFrom =
+    }
 
     /**
      * @inheritDoc
@@ -60,10 +76,9 @@ abstract class EnumFlag extends Enum implements Flag
     public static function flagToEnumNames(int $flag): ?array
     {
         $results = self::flagToValues($flag);
-        foreach ($results as $key => $category) {
-            $results[$key] = self::nameOf($category);
-        }
-        return $results;
+        return is_null($results) ?
+            null :
+            array_flip($results);
     }
 
     /**
@@ -75,27 +90,37 @@ abstract class EnumFlag extends Enum implements Flag
             return [$flag];
         }
 
-        $filtered = array_reverse(
-            array_filter(
-                static::$cache,
-                fn ($value) => $value < $flag && $value !== 0),
-            true);
+        $filtered = array_filter(
+            static::$cache,
+            fn ($value) => $value < $flag && $value !== 0);
 
-        $sum = array_reduce($filtered, fn ($acc, $item) => $acc + $item, 0);
-        if ($sum === $flag || count($filtered) === 2) {
-            return $filtered;
+        // nested ifs to save some performance if count != 2
+        if (count($filtered) === 2) {
+            $sum = array_reduce($filtered, fn ($acc, $item) => $acc + $item, 0);
+            if ($sum === $flag) {
+                return $filtered;
+            }
         }
 
+        $temp = $flag;
         $results = [];
         foreach ($filtered as $value) {
-            if ($value < $flag) {
-                $flag -= $value;
+            if ($value < $temp) {
+                $temp -= $value;
                 $results[] = $value;
-            } elseif ($value === $flag) {
+            } elseif ($value === $temp) {
                 $results[] = $value;
             }
         }
 
-        return $results;
+        $sum = array_reduce($filtered, fn ($acc, $item) => $acc + $item, 0);
+        return ($sum === $flag) ?
+            $results :
+            null;
+    }
+
+    public function instanceContains()
+    {
+
     }
 }

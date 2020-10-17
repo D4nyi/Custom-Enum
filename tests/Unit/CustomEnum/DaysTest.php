@@ -7,10 +7,10 @@
 
 namespace Tests\Unit\CustomEnum;
 
+use Example\Days;
 use PHPUnit\Framework\TestCase;
-use Tests\Classes\Days;
 
-class EnumFlagTest extends TestCase
+class DaysTest extends TestCase
 {
     public function testValuesToFlag()
     {
@@ -26,6 +26,9 @@ class EnumFlagTest extends TestCase
         $this->assertCount(2, $names);
         $this->assertContains('Monday', $names);
         $this->assertContains('Tuesday', $names);
+
+        $names = Days::flagToEnumNames(129);
+        $this->assertNull($names);
     }
 
     public function testFlagToValues()
