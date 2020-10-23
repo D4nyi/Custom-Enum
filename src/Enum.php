@@ -131,6 +131,7 @@ abstract class Enum
 
     /**
      * Creates a new instance from an enum name
+     *
      * @param string $name from which a new instance is initialized
      * @param bool   $caseSensitive
      * @return self
@@ -149,7 +150,7 @@ abstract class Enum
     }
 
     /**
-     * Gets the current enum value
+     * Gets the current enum value or the flag value
      *
      * @return int
      */

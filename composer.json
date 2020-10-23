@@ -42,6 +42,6 @@
     }
   },
   "scripts": {
-    "test": "phpunit --configuration phpunit.xml tests --teamcity --cache-result-file=.phpunit.result.cache"
+    "test": "phpunit --bootstrap vendor/autoload.php --configuration phpunit.xml tests"
   }
 }

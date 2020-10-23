@@ -13,7 +13,8 @@ class ColorTest extends TestCase
     const MinusOne = -1;
     const Big      = 102030405;
 
-    public function testConstruct(){
+    public function testConstruct()
+    {
         $color = new Color(Color::Red);
 
         $reflectionValue = new ReflectionProperty(Color::class, 'value');
@@ -171,17 +172,20 @@ class ColorTest extends TestCase
         $this->assertFalse(Color::isValidName('test', true));
     }
 
-    public function testGetName(){
+    public function testGetName()
+    {
         $color = new Color(Color::Red);
         $this->assertEquals('Red', $color->getName());
     }
 
-    public function testGetValue(){
+    public function testGetValue()
+    {
         $color = new Color(Color::Red);
         $this->assertEquals(Color::Red, $color->getValue());
     }
 
-    public function testGetAsKeyValue(){
+    public function testGetAsKeyValue()
+    {
         $color = new Color(Color::Red);
 
         $actual = $color->getAsKeyValue();
