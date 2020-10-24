@@ -10,9 +10,10 @@ declare(strict_types=1);
 namespace Example;
 
 use CustomEnum\EnumFlag;
+use CustomEnum\Interfaces\EnumFlag as Flag;
 use CustomEnum\Exceptions\InvalidValueException;
 
-final class Days extends EnumFlag
+final class Days extends EnumFlag implements Flag
 {
     public const None      = 0;
     public const Monday    = 1;
