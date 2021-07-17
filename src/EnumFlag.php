@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Dániel Szöllősi 2020 - 2020
+ * Copyright © Dániel Szöllősi 2020 - 2021
  * All rights reserved.
  * Created at 2020. 10. 10. 18:04
  */
@@ -11,6 +11,7 @@ namespace CustomEnum;
 
 use CustomEnum\Exceptions\InvalidFlagException;
 use CustomEnum\Interfaces\EnumFlag as Flag;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Trait EnumFlag
@@ -152,7 +153,7 @@ abstract class EnumFlag extends Enum implements Flag
      * @param int $enum
      * @return bool
      */
-    public function hasEnum(int $enum): bool
+    #[Pure] public function hasEnum(int $enum): bool
     {
         if (!self::isValidValue($enum)) {
             return false;

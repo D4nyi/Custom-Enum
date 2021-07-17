@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Dániel Szöllősi 2020 - 2020
+ * Copyright © Dániel Szöllősi 2020 - 2021
  * All rights reserved.
  * Created at 2020. 10. 10. 17:13
  */
@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace CustomEnum;
 
 use CustomEnum\Exceptions\InvalidValueException;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Class Enum
@@ -60,7 +61,7 @@ abstract class Enum
      * @param bool $strict  type check also applied not just value check
      * @return string the found name by the value, default is 'None' that provided if an error occurs
      */
-    public static final function nameOf(int $value, bool $toLower = false, bool $strict = true): string
+    #[Pure] public static final function nameOf(int $value, bool $toLower = false, bool $strict = true): string
     {
         $result =
             self::isValidValue($value, $strict) ?
@@ -120,7 +121,7 @@ abstract class Enum
      * @param bool   $caseSensitive case sensitive comparison
      * @return bool true if the value is found, otherwise false
      */
-    public static final function isValidName(string $name, $caseSensitive = false): bool
+    public static final function isValidName(string $name, bool $caseSensitive = false): bool
     {
         $constants = static::$cache;
         return
@@ -164,7 +165,7 @@ abstract class Enum
      *
      * @return int[]
      */
-    public final function getAsKeyValue(): array
+    #[Pure] public final function getAsKeyValue(): array
     {
         return [$this->getName() => $this->value];
     }

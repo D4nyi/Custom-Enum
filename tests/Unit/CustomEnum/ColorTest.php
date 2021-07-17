@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright © Dániel Szöllősi 2020 - 2021
+ * All rights reserved.
+ * Created at 2020. 10. 10. 19:01
+ */
 
 namespace Tests\Unit\CustomEnum;
 
