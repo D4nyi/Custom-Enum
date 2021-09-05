@@ -108,7 +108,7 @@ abstract class Enum
      */
     public static final function isValidValue(int $value, bool $strict = true): bool
     {
-        return !($strict && $value === 0) && // if strict true and the value is 0 than its not a valid value
+        return !($strict && $value === 0) && // if strict true and the value is 0 than it's not a valid value
                in_array($value,
                    static::$cache,
                    $strict); // if the value is found in the constants (strict -> type check is applied or not)

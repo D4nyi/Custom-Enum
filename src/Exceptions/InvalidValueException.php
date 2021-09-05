@@ -10,16 +10,5 @@ declare(strict_types=1);
 namespace CustomEnum\Exceptions;
 
 use InvalidArgumentException;
-use JetBrains\PhpStorm\Pure;
-use Throwable;
 
-class InvalidValueException extends InvalidArgumentException
-{
-    /**
-     * @inheritDoc
-     */
-    #[Pure] public function __construct($message = "", $code = 0, Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
-    }
-}
+class InvalidValueException extends InvalidArgumentException { }

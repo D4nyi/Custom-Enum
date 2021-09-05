@@ -60,11 +60,7 @@ abstract class EnumFlag extends Enum implements Flag
             return false;
         }
 
-        if ($flag === $enum) {
-            return true;
-        }
-
-        return in_array($enum, self::flagToValues($flag));
+        return $flag === $enum || in_array($enum, self::flagToValues($flag));
     }
 
     /**
@@ -159,11 +155,7 @@ abstract class EnumFlag extends Enum implements Flag
             return false;
         }
 
-        if ($this->value === $enum) {
-            return true;
-        }
-
-        return in_array($enum, $this->builtFrom);
+        return $this->value === $enum || in_array($enum, $this->builtFrom);
     }
 
     /**

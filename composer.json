@@ -30,8 +30,7 @@
       "CustomEnum\\": "src/"
     }
   },
-  "autoload-dev":
-  {
+  "autoload-dev": {
     "psr-0": {
       "Tests\\": "tests/",
       "Example\\": "examples"
